@@ -1,0 +1,100 @@
+
+\documentclass{IOS-Book-Article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{mathptmx}
+\usepackage{soul}\setuldepth{article}
+
+
+\usepackage{algpseudocode}
+
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{CJKutf8}
+\usepackage{graphicx,pstricks}
+\usepackage{ulem}
+\usepackage{tikz}
+\usepackage{algpseudocode}
+
+\usepackage{moreverb}
+\usepackage{subcaption}
+\usepackage{epsfig}
+\usepackage{multirow}
+\usepackage[percent]{overpic}
+\usepackage{textcomp}
+\usepackage{subfiles}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{algorithmicx}
+\usepackage{ctable}
+\usepackage{txfonts}
+\usepackage{palatino}
+\begin{comment}
+\end{comment}
+\usepackage{csquotes}
+\renewcommand{\mkbegdispquote}[2]{\itshape}
+\usepackage{textcomp}
+\usepackage{url}
+% fg settings
+\newcommand{\setttsize}[1]{\def\ttsize{#1}}%
+\newcommand{\mvmtmldir}[0]{/Users/psychomugs/projects/mvmt_ml_results/blossom_face/}
+% ubicomp settings
+\newcommand{\tablevspace}[0]{-.3cm}
+\newcommand{\figwidth}[0]{0.9}
+% \newcommand{\ms}[1]{\textcolor{red}{$<$MS: #1$>$}}
+\newcommand{\ms}[1]{\textcolor{red}{#1}}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+\def\hb{\hbox to 11.5 cm{}}
+
+\begin{document}
+\begin{CJK*}{UTF8}{min}
+
+\pagestyle{headings}
+\def\thepage{}
+
+\begin{frontmatter}              % The preamble begins here.
+
+
+\title{
+At Least, Be Human:\\
+Humanizing the Robot as a\\
+Medium for Communication}
+% \title{
+% At Least, Be Human: Humanizing the\\
+% Robot as a Medium for Communication}
+
+\markboth{}{August 2022\hb}
+
+\author{\fnms{Michael} \snm{Suguitan}%
+\thanks{E-mail:
+mjs679@cornell.edu}}
+
+\runningauthor{M. Suguitan}
+\address{Cornell University}
+
+\begin{abstract}
+A central tenet of human-robot interaction research is to humanize social robots as collaborators and companions.
+Literal approaches to humanizing, either through human-like behaviors or humanoid embodiments, pose technological and social challenges that have precluded adoption of robots in everyday contexts.
+Even if convincingly humanized robots could be achieved, human-robot interaction may enable an escapism that diminishes our capacity for human-human interaction.
+I propose to avoid these pitfalls by humanizing the robot as a medium for communication through accessibility.
+Accessibility humanizes technology by makings inner workings visible and familiar to human users, promoting understanding of technological processes and imperfections.
+Accessibility also enables broader demographics of lay users to become involved with robotics, enabling communication \textit{through} robots, from development processes (e.g. physical and behavioral design) to applications (e.g. telepresence).
+I use the open-source Blossom social robot as an extended case study of this approach, and detail its technical implementations and research deployments.
+The goal of this work is to present accessibility as a way to humanize robots while enabling robot-mediated communication for human-human interaction.
+\end{abstract}
+
+\begin{keyword}
+human-robot interaction\sep robot-mediated communication\sep\\
+accessibility\sep design\sep artificial intelligence\sep telepresence
+\end{keyword}
+\end{frontmatter}
+\markboth{August 2022\hb}{August 2022\hb}
+\input{./robophilosophy/robophilosophy-1-intro}
+\input{./robophilosophy/robophilosophy-2-implementation}
+\input{./robophilosophy/robophilosophy-3-conclusion}
+
+\bibliographystyle{ieeetr}
+\bibliography{master.bib}
+
+\end{CJK*}
+\end{document}

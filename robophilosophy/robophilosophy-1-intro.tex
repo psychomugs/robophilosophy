@@ -1,0 +1,78 @@
+%!TEX root=../robophilosophy.tex
+
+\section{Introduction}
+Drawing from several definitions of social robots \cite{breazeal2004designing,dautenhahn1999bringing,duffy2003anthropomorphism,fong2003survey}, a prevailing notion is the objective of humanizing robots to facilitate social interactions.
+Humanizing is often taken literally through two objectives: human-like intelligence or lifelike humanoid embodiments \cite{giger2019humanization,mays2021humanizing}.
+However, these approaches pose large technological and social challenges.
+Consumer social robots (e.g. Anki's Cozmo and Vector \cite{ankivector}, Jibo \cite{jibo}, Kuri \cite{kuri}) have had difficulty finding commercial success; this may be attributed to the high expectations for interaction -- often set by fiction \cite{komatsu2012expectations,sandoval2014human} -- that are difficult to attain.
+Conversely, humanoid robots (e.g. Geminoids \cite{nishio2007geminoid}, Sophia \cite{hansonsophia}) and their imperfect approximation of human likeness may fail to meet our expectations for interaction, eliciting an unease that lands these robots in Mori's uncanny valley (Figure~\ref{fig:related.bukimi})~\cite{mori1970uncanny}.
+The challenging expectations of literal humanization have limited acceptance of social robots in contexts beyond controlled research settings.
+Even if sufficiently capable robots could be realized, human-robot interaction may yield scenarios that, like other technologies such as mobile computing and entertainment media, may negatively affect our capacity for human-human interaction.
+
+In this work, I propose an alternative approach to humanizing robots through accessibility.
+Accessibility can enable lay users without prior robotics experience to become familiar with typically esoteric aspects of robotics, particularly its physical and behavioral design.
+In contrast to typical human-robot interaction scenarios, which involves users communicating \textit{with} a robot, accessibility reframes the social role of the robot as a medium \textit{through} which users communicate.
+Example scenarios include personalization of the robot's design and an application of the robot as an embodied telepresence platform.
+In this article, I use the open-source Blossom social robot as an extended case study and detail three phases of its development: design, movement, and telepresence.
+The primary objectives of this work are to present accessibility as an approach to humanizing robots, while hopefully inspiring other applications of accessibility that enable robot-mediated communication for human-human interaction.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[trim={13cm 1cm 14cm 7cm},clip,width=0.7\columnwidth]{figures/related.bukimi}
+    \caption{Our proposed approach for humanizing the robot, referencing Mori's \textit{bukimi no tani}~(不気味の谷, ``the valley of eerieness,'' anglicized as ``the uncanny valley'') as a conceptual framework \cite{mori1970uncanny}. I equate ``humanizing'' with maximizing ``human affinity'' on the vertical axis of the graph (left green arrow), and journey out of the valley by making accessible (gray arrow) three phases of robot development: design, movement, and telepresence.}
+    \label{fig:related.bukimi}
+\end{figure}
+
+\section{Preliminaries and Definitions, or \textit{What I Talk About When I Talk About...}}
+In this section, I provide my definitions for key terms -- humanizing, medium, and communication -- and my rationale for pursuing accessibility as a humanizing element for robots.
+
+\subsection{... Humanizing the Robot}
+My approach to humanizing robots through accessibility begins with a reevaluation of Mori's \textit{bukimi no tani} (不気味の谷, ``the valley of eerieness''), anglicized as ``the uncanny valley.''
+Originally in reference to the design and movement of prostheses, the phenomenon refers to slightly imperfect approximations of human features eliciting a sense of unease.
+The graph's horizontal and vertical axes, originally \textit{ruijido}~(類似同, ``degree of similarity'') and \textit{shinwakan} (親和感, ``fellowship feeling''), are often anglicized as ``human likeness'' and ``affinity,'' respectively.
+``Affinity'' itself is defined as ``a liking for or an attraction to something; a quality that makes people or things suited to each other'' \cite{affinity}; this notion is similar to familiarity\footnote{The first character of \textit{shinwakan}, 親, can be read as ``familiarity.'' Karl MacDorman interpreted \textit{shinwakan} as ``familiarity'' in his initial 2005 translation \cite{macdorman2005mortality}, then as ``affinity'' in his updated 2012 translation \cite{mori2012uncanny}.}. 
+I argue that a ``human'' before ``affinity'' may have been lost in translation; reintroducing it yields ``human affinity,'' which I equate to the definition of ``humanizing.''
+Thus, to humanize is to increase the feeling of human affinity and familiarity, which I interpret as maximizing the vertical position on the uncanny valley graph (Figure~\ref{fig:related.bukimi}, green arrow).
+
+Due to the difficulty of literal humanization through human-familiar behaviors and embodiments, I propose to humanize robots through zoomorphism and accessibility.
+The ``stuffed animal'' region of zoomorphic likeness lies at a local maxima before the fall into the valley.
+Though it seems counter-intuitive to humanize the robot through non-humanoid zoomorphism, we often humanize animals and anthropomorphize personal belongings, e.g. musical instruments and vehicles \cite{jacob2012yeah}.
+Zoomorphism can lower expectations for interaction while drawing upon our social history of animal companionship and familiarity \cite{darling2021new}.
+Accessibility can promote familiarity by making the robot's inner workings visible and understandable to lay users without prior robotics experience.
+This notion of humanizing through accessibility is echoed in post-digital aesthetics \cite{cascone2000aesthetics,cramer2015post,simbelis2018humanizing,thibault2018made}, which humanizes technology by making processes familiar to users and embracing imperfections, communicating the humanity of the technology's creators and users.
+Post-digital's emphasis on processes draws attention to technological mediums, inviting interpretation of robots as mediums themselves.
+
+\subsection{... Medium for Communication}
+While robots in social contexts are typically interpreted as independent agents \textit{with} whom we communicate, we can also interpret them as technological mediums \textit{through} which we communicate.
+Mediums can be any technology, artificial or natural, that enable communication, such as telephones which communicate auditory messages or photographs which communicate visual information; this relationship is formalized in Shannon's model of communication, wherein a message is encoded and decoded through a medium \cite{shannon1948communication}.
+McLuhan, in declaring ``the medium is the message,'' argued that communicated messages (e.g. a particular phone conversation, a specific photograph of an event) are of secondary importance to mediums themselves and their ecological effects on environments of human communication \cite{mcluhan1964understanding}.
+Hoorn has applied existing theories of computer-mediated communication in the context of robots as two distinct modes: human-robot communication (\textit{with} the robot) and robot-mediated communication (\textit{through} the robot) \cite{hoorn2020medium}.
+Because of the aforementioned difficulty in realizing convincing autonomous agents, I focus on accessible robot-mediated communication between human users.
+
+As McLuhan theorized, the effects of mediums both extend and amputate our capacity for communication.
+The mobile smartphone extends our social connectivity but amputates our capacity for face-to-face communication; the photograph extends our visual communication but amputates our visual memory through the ``photo-taking-impairment effect'' \cite{henkel2014photo}.
+Critics of social robots argue that robots pose similar risks for amputation, particularly in human-robot communication scenarios.
+Turkle recounts users willing to replace their human partners with agreeable robots, becoming dependent on robots for matters as personal as health, or creating robotic replacements for the deceased \cite{turkle2017alone}.
+Other scholars have argued that offloading human interactions to robots (e.g therapy, caretaking) may be dehumanizing for vulnerable populations \cite{calo2011ethical,williams2021misfit}.
+These social amputations enable escapism from difficult human-human interactions towards the refuge of robots that neither tire nor disagree.
+
+I believe that the robot-mediated mode offers opportunities for extending human communication, particularly through the unique affordance of physicality.
+Though telepresence is the canonical application for robot-mediated communication, accessibility enables communication through other aspects of the robot, such as the design of its physical embodiment or the authoring of its behaviors.
+Users can convey diverse interpretations through accessible robot design, challenging notions of how robots \textit{should} be by imagining how robots \textit{could} be.
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[trim={0mm 25mm 0mm 25mm},clip,width=1.\textwidth]{figures/blossom_comm.jpeg}
+    \caption{Blossom's journey out of the uncanny valley (left) and interpreting each phase (design, movement, telepresence) as forms of robot-mediated communication, as formalized through Shannon's model of communication (right) \cite{shannon1948communication}.}
+    \label{fig:blossom_comm}
+\end{figure*}
+
+As an extended case study of our approach, I provide example deployments of the open-source Blossom social robot and detail three phases of its development: design, movement, and telepresence (Figure~\ref{fig:blossom_comm}).
+We first move out of the valley through an open-source zoomorphic design;
+accessible design enables lay users to communicate their notions of robot design through customization.
+We next move further up through movement authoring that enables lay users to program robot behaviors;
+accessible behavior programming enables lay users to communicate their interpretations of appropriate robot behaviors through high-level programming.
+We finally move beyond the peak through embodied telepresence;
+accessible telepresence enables lay users to communicate their physical presence at a distance.
+Blossom's journey out of the uncanny valley represents accessibility as a way to humanize robots for robot-mediated communication.
+% The following sections provide overviews of each phase, including technical implementations and research applications.

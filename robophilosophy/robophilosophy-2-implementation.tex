@@ -1,0 +1,87 @@
+%!TEX root=../robophilosophy.tex
+
+\section{Implementation on the Blossom Robot}
+In this section, I discuss three phases of Blossom's development -- design, movement, and telepresence -- and how each phase humanizes through accessibility and enables robot-mediated communication.
+I provide overviews of the technical implementations and research applications.
+
+\subsection{Design}
+\begin{figure*}[h]
+    \centering
+    % \includegraphics[trim={122mm 15mm 82mm 40mm},clip,width=1.\textwidth]{figures/robophil_design.jpeg}
+    \includegraphics[trim={122mm 15mm 22mm 45mm},clip,width=1.\textwidth]{figures/design.anno.jpeg}
+
+    \caption{Annotated portfolio \cite{gaver2012annotated} of Blossom and the aesthetic concepts that inspired its design.}
+    \label{fig:design.anno}
+\end{figure*}
+
+Blossom's design is accessible through its open-source interior mechanism and user-customizable exterior (Figure~\ref{fig:design.anno}, center) \cite{suguitan2019blossom}.
+The interior mechanism is constructed from laser cut wood and consists of a head platform suspended from a central tower component using rubber bands (Figure~\ref{fig:design.anno}, left).
+Motors at the bottom of the tower actuate the head by reeling in strings attached to the head platform.
+The tensile components achieve a large range of motion and passively smooth, lifelike movement, similar to the squash-and-stretch and follow-through principles of animation \cite{thomas1981illusion}.
+The base robot features four degrees of freedom (roll, pitch, yaw, vertical translation); users can attach additional motors for appendages such as ears and arms.
+The exterior is made of soft fabrics that are crafted by the user, inviting a broader range of users to be involved in robot building.
+We have deployed Blossom in several contexts, ranging from demonstrations to in-depth robot-building workshops, where students (adolescents aged 10-13) worked in groups to build the interior mechanism, customize the exterior (Figure~\ref{fig:design.anno}, bottom right, top row), and choreograph movements to videos.
+Other researchers have created Blossoms for their own applications (Figure~\ref{fig:design.anno}, bottom right, bottom row), including using Blossom as a ``canvas'' for exploring robot clothing \cite{friedman2021clothing}.
+
+In the way that Norman frames artifacts as the medium through with designers indirectly communicate with their users \cite{norman2013design}, Blossom as an artifact communicates several aesthetic concepts that inspired its design.
+Elements of post-digital design are present in the blending of analog and digital mediums (elastics and wood next to motors and microcomputers) and the inherent imperfection of its hand-crafted exterior.
+Related to post-digital is \textit{kintsugi} (金継ぎ, ``golden repair''), a Japanese aesthetic that embraces imperfection by celebrating repair and our enduring relationships with objects \cite{richie2007tractate}.
+The use of unconventional materials and resulting ``non-robotic'' embodiment appeals to tenets of critical design, a way to challenge preconceived notions of products and their roles in our lives \cite{dunnerabycritical}.
+% Like W. Grey Walter's robotic tortoises, the progenitors of modern robots, 
+
+% \ms{Any "clean" way to make this a discourse / aside-like section?}
+Blossom's design also pays homage to the history of robots.
+W. Grey Walter, a psychologist who created the first robotic tortoises that would become the progenitors of modern physical robots, found that even simple attraction or repulsion from light sources elicited lifelike behaviors, enough for Walter to bestow unique names to the respective robots: Elmer and Elsie \cite{walter1950imitation}.
+Similarly, though Blossom is reducible to a simple assembly of motors and subroutines, the resulting expressiveness and lifelikeness suggests more than the sum of its components belie.
+Drawing from Walter Benjamin's seminal \textit{The Work of Art in the Age of Mechanical Reproduction} \cite{benjamin1935work}, each Blossom's existence as a unique instantiation of the base robot imbues the artifact with an ``aura,'' the unique spatiotemporal quality lost with the commodification of mass-produced objects.
+% Aura contrasts with the relationship of robots and industrialization, from both their use as machines for mechanical reproduction, and as mechanically reproduced machines themselves.
+
+Beyond roboticists and designers, lay users can communicate their interpretations of robot aesthetics through Blossom's design (Figure \ref{fig:blossom_comm}, bottom right).
+In the deployments, participants worked together to realize various robot aesthetics and related the designs to personal experiences, such as their favorite media and hobbies.
+Users also used designs to project their ideal capabilities of the robot, such as functional appendages (e.g. arms, wings, tails) or locomotion.
+We enable preliminary exploration of these capabilities by making accessible the authoring of movements, a form of message unique to the physical medium of robots.
+
+\subsection{Movement}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[trim={6cm 4cm 6cm 3cm},clip,width=.7\columnwidth]{figures/tele.system.jpeg}
+    \caption{
+        The movement authoring system.
+        Users move the phone (left), and \texttt{DeviceOrientation} transmits the motion of the phone through \texttt{ngrok} and \texttt{socket.io} to the robot.
+        The robot's back end inverse kinematics model calculates the motor positions required to match the phone's pose.
+        For the telepresence application, \texttt{WebRTC} transmits a first-person video feed from a wide-angle camera embedded inside the robot's head to the phone interface.}
+    \label{fig:mvmt.system}
+\end{figure}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.9\columnwidth]{figures/face_mvmt.png}
+    \caption{One of the behavior generation neural network models: a face→movement translation network. The movement variational autoencoder (VAE) learns compressed representations of the original movements (top left to right). An additional ResNet-based image encoder (bottom left) compresses images of facial expressions $x_f$ into the shared latent space $\{z_m,z_f\}$. Once the end-to-end network is trained, we can either generate new movements by sampling from $z_m$ and passing through the movement decoder (top left to right) or translate faces into movements by passing images through the face encoder and movement decoder (bottom left to right).}
+    \label{fig:mvmt.vae}
+\end{figure}
+
+Blossom's movement is accessible through its motion-based smartphone interface (Figure~\ref{fig:mvmt.system}) \cite{suguitan2020moveae}.
+Unlike traditional robot movement authoring systems that require high levels of expertise (e.g. motion planning software, manual robot operation techniques), the smartphone interface is familiar to users without prior robotics experience.
+The interface transmits the phone's motion data to the robot's host computer, which then calculates the motor positions to match the robot's head orientation to the phone's orientation.
+Using this interface, we crowdsourced movement samples from lay users by asking them to puppeteer the robot as if it were conveying a range of emotions (happiness, sadness, anger).
+We used the crowdsourced movements as inputs for behavior generation models based on encoder-decoder neural networks, specifically variational autoencoders (VAE) \cite{kingma2013auto} (Figure \ref{fig:mvmt.vae}).
+Once trained, the models could generate new movements, modify the emotive quality of existing movements \cite{suguitan2020moveae}, and translate affective inputs (e.g. facial expressions) into movements as emotive responses.
+
+Blossom's accessible movement authoring system enables users to communicate their interpretations of robot behaviors (Figure \ref{fig:blossom_comm}, middle right).
+Unlike closed-source robot systems, enabling users to ``teach'' new behaviors iteratively expands and personalizes its behavior library to stave off staleness.
+The encoder-decoder architecture of the neural network models is analogous to the compression of Shannon's communication model.
+By extending the movement control system with remote access through the internet, we enable real-time human-human communication through Blossom's telepresence capabilities.
+
+\subsection{Telepresence}
+
+Similar to movement, Blossom's telepresence is accessible through the ease of use of its interface \cite{youarenottherobot2021suguitan}.
+Users can access the interface remotely through a mobile browser with no additional software.
+A camera in Blossom's head streams a first-person video feed to the phone, enabling remote users to view the space as if they were embodying the robot (Figure~\ref{fig:mvmt.system}, left).
+We have used the system in human evaluations (N=30), where users remotely controlled the robot to create emotive movements to expand the behavior dataset \cite{suguitan2022variable}.
+We varied the viewpoint between either first-person (internal video \textit{from} the robot viewed on the phone interface) or third-person (external video \textit{of} the robot viewed on a separate desktop browser interface) perspectives.
+We found large preferences for the third-person perspective, though the COVID-mandated social distancing restrictions prevented us from evaluating the system in a human-human interaction scenarios preferable for the first-person perspective.
+
+Blossom's accessible telepresence is the most direct example of robot-mediated communication between human users (Figure \ref{fig:blossom_comm}, top right).
+Unlike traditional button- or joystick-centric interfaces for screen-based telepresence robots that abstract users away from their own embodiment, the motion-based interface and Blossom's motion-centric embodiment enable a more direct communication of the remote user's physicality.
+% I envision this system as a general embodied communication device with the unique affordance of physicality, granting users agency over their viewpoint and increasing their sense of presence in the remote location.
+We envision this system as a general embodied communication device that transmits a user's physicality and increases their sense of presence in the remote location.

@@ -1,0 +1,83 @@
+This is BibTeX, Version 0.99d (TeX Live 2021)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: robophilosophy.aux
+The style file: ieeetr.bst
+Database file #1: master.bib
+Repeated entry---line 1552 of file master.bib
+ : @incollection{nishio2007geminoid
+ :                                 ,
+I'm skipping whatever remains of this entry
+Warning--entry type for "hansonsophia" isn't style-file defined
+--line 1604 of file master.bib
+Warning--entry type for "ankivector" isn't style-file defined
+--line 1611 of file master.bib
+Warning--entry type for "dunnerabycritical" isn't style-file defined
+--line 1845 of file master.bib
+Repeated entry---line 1996 of file master.bib
+ : @book{breazeal2004designing
+ :                            ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2085 of file master.bib
+ : @article{fong2003survey
+ :                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2617 of file master.bib
+ : @inproceedings{dautenhahn1999bringing
+ :                                      ,
+I'm skipping whatever remains of this entry
+You're missing a field name---line 2923 of file master.bib
+ : 
+ : ,
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Repeated entry---line 3360 of file master.bib
+ : @inproceedings{suguitan2020moveae
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 3908 of file master.bib
+ : @article{nishio2007geminoid
+ :                            ,
+I'm skipping whatever remains of this entry
+Warning--empty publisher in thomas1981illusion
+You've used 44 entries,
+            1876 wiz_defined-function locations,
+            715 strings with 9611 characters,
+and the built_in function-call counts, 10290 in all, are:
+= -- 1045
+> -- 306
+< -- 0
++ -- 125
+- -- 81
+* -- 612
+:= -- 1397
+add.period$ -- 54
+call.type$ -- 44
+change.case$ -- 34
+chr.to.int$ -- 0
+cite$ -- 45
+duplicate$ -- 566
+empty$ -- 1096
+format.name$ -- 81
+if$ -- 2580
+int.to.chr$ -- 0
+int.to.str$ -- 44
+missing$ -- 42
+newline$ -- 147
+num.names$ -- 44
+pop$ -- 191
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 380
+stack$ -- 0
+substring$ -- 597
+swap$ -- 212
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 1
+while$ -- 104
+width$ -- 46
+write$ -- 415
+(There were 7 error messages)
